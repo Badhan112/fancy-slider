@@ -39,7 +39,7 @@ let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
   element.classList.add('added');
- 
+
   let item = sliders.indexOf(img);
   if (item === -1) {
     sliders.push(img);
@@ -67,7 +67,7 @@ const createSlider = (duration) => {
   document.querySelector('.main').style.display = 'block';
   // hide image aria
   imagesArea.style.display = 'none';
-  
+
   sliders.forEach(slide => {
     let item = document.createElement('div')
     item.className = "slider-item";
@@ -109,6 +109,14 @@ const changeSlide = (index) => {
   items[index].style.display = "block"
 }
 
+const addEnterKeyEventListenner = (inputId, btn) => {
+  document.getElementById(inputId).addEventListener("keypress", function (event) {
+    if(event.key === "Enter"){
+      btn.click();
+    }
+  })
+}
+
 searchBtn.addEventListener('click', function () {
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
@@ -119,10 +127,14 @@ searchBtn.addEventListener('click', function () {
 
 sliderBtn.addEventListener('click', function () {
   const duration = document.getElementById('duration').value || 1000;
-  if(duration < 100){
+  if (duration < 100) {
     alert("Slider Change Duration is in Mili-Second. Please, Put More than or Equal to 100 mili second for batter result");
   }
-  else{
+  else {
     createSlider(duration);
   }
 })
+
+addEnterKeyEventListenner("search", searchBtn);
+addEnterKeyEventListenner("duration", sliderBtn);
+
