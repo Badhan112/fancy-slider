@@ -48,7 +48,7 @@ const selectItem = (event, img) => {
   }
 }
 var timer
-const createSlider = () => {
+const createSlider = (duration) => {
   // check slider image length
   if (sliders.length < 2) {
     alert('Select at least 2 image.')
@@ -67,7 +67,7 @@ const createSlider = () => {
   document.querySelector('.main').style.display = 'block';
   // hide image aria
   imagesArea.style.display = 'none';
-  const duration = document.getElementById('duration').value || 1000;
+  
   sliders.forEach(slide => {
     let item = document.createElement('div')
     item.className = "slider-item";
@@ -118,5 +118,11 @@ searchBtn.addEventListener('click', function () {
 })
 
 sliderBtn.addEventListener('click', function () {
-  createSlider()
+  const duration = document.getElementById('duration').value || 1000;
+  if(duration < 100){
+    alert("Slider Change Duration is in Mili-Second. Please, Put More than or Equal to 100 mili second for batter result");
+  }
+  else{
+    createSlider(duration);
+  }
 })
