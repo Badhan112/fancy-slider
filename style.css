@@ -64,3 +64,27 @@ img {
     width: 90%;
   }
 }
+
+#spinner{
+  border: 10px solid rgb(235, 235, 235);
+  border-top: 10px solid rgb(50, 51, 50);
+  border-bottom: 10px solid rgb(50, 51, 50);
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  margin: 50px auto;
+  animation: spin 1s infinite ease;
+}
+
+@keyframes spin{
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
+
+.hide-spinner{
+  display: none;
+}

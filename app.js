@@ -15,17 +15,23 @@ const KEY = '15674931-a9d714b6e9d654524df198e00&q';
 
 // show images 
 const showImages = (images) => {
-  imagesArea.style.display = 'block';
-  gallery.innerHTML = '';
-  // show gallery title
-  galleryHeader.style.display = 'flex';
-  images.forEach(image => {
-    let div = document.createElement('div');
-    div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
-    div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
-    gallery.appendChild(div)
-  })
-
+  if (images.length == 0) {
+    alert("No Image Found!");
+  }
+  else {
+    console.log(images);
+    imagesArea.style.display = 'block';
+    gallery.innerHTML = '';
+    // show gallery title
+    galleryHeader.style.display = 'flex';
+    images.forEach(image => {
+      let div = document.createElement('div');
+      div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
+      div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
+      gallery.appendChild(div)
+    })
+  }
+  toggleSpinner();
 }
 
 const getImages = (query) => {
@@ -111,10 +117,15 @@ const changeSlide = (index) => {
 
 const addEnterKeyEventListenner = (inputId, btn) => {
   document.getElementById(inputId).addEventListener("keypress", function (event) {
-    if(event.key === "Enter"){
+    if (event.key === "Enter") {
       btn.click();
     }
   })
+}
+
+const toggleSpinner = () => {
+  const spinner = document.getElementById("spinner");
+  spinner.classList.toggle("hide-spinner");
 }
 
 searchBtn.addEventListener('click', function () {
@@ -123,6 +134,7 @@ searchBtn.addEventListener('click', function () {
   const search = document.getElementById('search');
   getImages(search.value)
   sliders.length = 0;
+  toggleSpinner();
 })
 
 sliderBtn.addEventListener('click', function () {
