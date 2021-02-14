@@ -4,6 +4,7 @@ const galleryHeader = document.querySelector('.gallery-header');
 const searchBtn = document.getElementById('search-btn');
 const sliderBtn = document.getElementById('create-slider');
 const sliderContainer = document.getElementById('sliders');
+const backBtn = document.getElementById("backBtn");
 // selected image 
 let sliders = [];
 
@@ -19,7 +20,6 @@ const showImages = (images) => {
     alert("No Image Found!");
   }
   else {
-    console.log(images);
     imagesArea.style.display = 'block';
     gallery.innerHTML = '';
     // show gallery title
@@ -60,6 +60,7 @@ const createSlider = (duration) => {
     alert('Select at least 2 image.')
     return;
   }
+  backBtn.style.display = 'block';
   // crate slider previous next area
   sliderContainer.innerHTML = '';
   const prevNext = document.createElement('div');
@@ -135,12 +136,13 @@ searchBtn.addEventListener('click', function () {
   getImages(search.value)
   sliders.length = 0;
   toggleSpinner();
+  backBtn.style.display = 'none';
 })
 
 sliderBtn.addEventListener('click', function () {
   const duration = document.getElementById('duration').value || 1000;
-  if (duration < 100) {
-    alert("Slider Change Duration is in Mili-Second. Please, Put More than or Equal to 100 mili second for batter result");
+  if (duration < 0) {
+    alert("Negative value for Slider Change Duration is Not Accepted");
   }
   else {
     createSlider(duration);
@@ -149,4 +151,11 @@ sliderBtn.addEventListener('click', function () {
 
 addEnterKeyEventListenner("search", searchBtn);
 addEnterKeyEventListenner("duration", sliderBtn);
+
+backBtn.addEventListener("click", function () {
+  document.querySelector('.main').style.display = 'none';
+  imagesArea.style.display = 'block';
+  backBtn.style.display = 'none';
+})
+
 

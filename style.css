@@ -88,3 +88,13 @@ img {
 .hide-spinner{
   display: none;
 }
+
+#backBtn i{
+  font-size: 50px;
+  color: #30266d;
+}
+#backBtn{
+  width: max-content;
+  cursor: pointer;
+  display: none;
+}
